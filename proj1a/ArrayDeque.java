@@ -48,7 +48,7 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
-        if (length >= 16 && size/length <= 0.25) {
+        if (length >= 16 && size / length <= 0.25) {
             shrink();
         }
         if (size == 0) {
@@ -62,7 +62,7 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
-        if (length >= 16 && size/length <= 0.25) {
+        if (length >= 16 && size / length <= 0.25) {
             shrink();
         }
         if (size == 0) {
@@ -86,21 +86,21 @@ public class ArrayDeque<T> {
         return array[ptr];
     }
 
-    public int plusone(int i) {
-        if (i >= length-1) {
+    private int plusone(int i) {
+        if (i == length - 1) {
             return 0;
         }
         return i + 1;
     }
 
-    public int minusone(int i) {
+    private int minusone(int i) {
         if (i == 0) {
             return length - 1;
         }
         return i - 1;
     }
 
-    public void resize(int s) {
+    private void resize(int s) {
         T[] a = (T[]) new Object[s];
         int p1 = front;
         int p2 = 0;
@@ -115,8 +115,8 @@ public class ArrayDeque<T> {
         length = s;
     }
 
-    public void shrink() {
-        T[] a = (T[]) new Object[length/2];
+    private void shrink() {
+        T[] a = (T[]) new Object[length / 2];
         int p1 = front;
         int p2 = 0;
         while (p1 != end) {
@@ -127,6 +127,6 @@ public class ArrayDeque<T> {
         front = 0;
         end = p2;
         array = a;
-        length = length/2;
+        length = length / 2;
     }
 }
