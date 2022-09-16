@@ -56,7 +56,6 @@ public class ArrayDeque<T> {
         }
         T ret = array[front];
         front = plusone(front);
-        array[front] = null;
         size -= 1;
         return ret;
     }
@@ -70,13 +69,12 @@ public class ArrayDeque<T> {
         }
         T ret = array[end];
         end = minusone(end);
-        array[end] = null;
         size -= 1;
         return ret;
     }
 
     public T get(int index) {
-        if (index >= size) {
+        if (index >= length) {
             return null;
         }
         int ptr = front;
