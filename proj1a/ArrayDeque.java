@@ -27,7 +27,7 @@ public class ArrayDeque<T> {
             resize(size * 2);
         }
         array[end] = item;
-        end = plusone(front);
+        end = plusone(front, length);
         size += 1;
     }
 
@@ -43,26 +43,26 @@ public class ArrayDeque<T> {
         int ptr = front;
         while (ptr != end) {
             System.out.println(array[ptr] + " ");
-            ptr = plusone(ptr);
+            ptr = plusone(ptr, length);
         }
     }
 
     public T removeFirst() {
         if (length >= 16 && size / length <= 0.25) {
-            resize(length / 2);
+            shrink(length / 2);
         }
         if (size == 0) {
             return null;
         }
         T ret = array[front];
-        front = plusone(front);
+        front = plusone(front, length);
         size -= 1;
         return ret;
     }
 
     public T removeLast() {
         if (length >= 16 && size / length <= 0.25) {
-            resize(length / 2);
+            shrink(length / 2);
         }
         if (size == 0) {
             return null;
@@ -79,13 +79,13 @@ public class ArrayDeque<T> {
         }
         int ptr = front;
         for (int i = 0; i < index; i++) {
-            ptr = plusone(ptr);
+            ptr = plusone(ptr, length);
         }
         return array[ptr];
     }
 
-    private int plusone(int i) {
-        if (i == length - 1) {
+    private int plusone(int i, int len) {
+        if (i == len - 1) {
             return 0;
         }
         return i + 1;
@@ -101,16 +101,31 @@ public class ArrayDeque<T> {
     private void resize(int s) {
         T[] a = (T[]) new Object[s];
         int p1 = front;
-        int p2 = 0;
+        int p2 = length;
         while (p1 != end) {
             a[p2] = array[p1];
-            p1 = plusone(p1);
-            p2 += 1;
+            p1 = plusone(p1, length);
+            p2 = plusone(p2, s);
         }
-        length = s;
-        front = minusone(0);
+        front = minusone(length);
         end = p2 + 1;
         array = a;
+        length = s;
+    }
+
+    private void shrink(int s) {
+        T[] a = (T[]) new Object[s];
+        int p1 = front;
+        int p2 = length / 4;
+        while (p1 != end) {
+            a[p2] = array[p1];
+            p1 = plusone(p1, length);
+            p2 = plusone(p2, s);
+        }
+        front = minusone(length / 4);
+        end = p2 + 1;
+        array = a;
+        length = s;
     }
 
 }
