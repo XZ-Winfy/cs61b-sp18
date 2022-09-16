@@ -1,8 +1,8 @@
 public class LinkedListDeque<T> {
     private class Node {
-        public T item;
-        public Node next;
-        public Node prev;
+        private T item;
+        private Node next;
+        private Node prev;
 
         public Node(T i, Node pre, Node nxt) {
             item = i;
@@ -91,7 +91,7 @@ public class LinkedListDeque<T> {
         return getRecurHelp(sentinel.next, index);
     }
 
-    public T getRecurHelp(Node n, int index) {
+    private T getRecurHelp(Node n, int index) {
         if (index == 0) {
             return n.item;
         }
