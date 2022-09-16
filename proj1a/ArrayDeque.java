@@ -107,10 +107,10 @@ public class ArrayDeque<T> {
             p1 = plusone(p1);
             p2 += 1;
         }
-        front = 0;
-        end = p2;
-        array = a;
         length = s;
+        front = minusone(0);
+        end = p2 + 1;
+        array = a;
     }
 
     private void shrink() {
@@ -122,9 +122,9 @@ public class ArrayDeque<T> {
             p1 = plusone(p1);
             p2 += 1;
         }
-        front = 0;
-        end = p2;
-        array = a;
         length = length / 2;
+        front = minusone(0);
+        end = p2 + 1;
+        array = a;
     }
 }
