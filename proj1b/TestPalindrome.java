@@ -27,7 +27,7 @@ public class TestPalindrome {
 
     @Test
     public void isOffByOnePalindrome() {
-        CharacterComparator cc = new offByOne();
+        CharacterComparator cc = new OffByOne();
         assertTrue(palindrome.isPalindrome("flake", cc));
 
         assertFalse(palindrome.isPalindrome("noon", cc));
